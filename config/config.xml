@@ -1,6 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?> 
 <config>
-  <box_id>asdfasdfjlj</box_id>
-  <server_ip>172.30.4.18</server_ip>
-  <server_port>99</server_port>
+  <box_id>08000001</box_id>
+  <server_ip>172.30.4.168</server_ip>
+  <server_port>50003</server_port>
+  <scan_folder>log</scan_folder>
+  
+  <test></test>
 </config>

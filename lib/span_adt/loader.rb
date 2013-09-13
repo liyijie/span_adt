@@ -1,7 +1,9 @@
 module SpanAdt
 
   class Loader
-    attr_reader :box_id, :server_ip, :server_port
+    include Singleton
+
+    attr_reader :box_id, :server_ip, :server_port, :scan_folder, :test
 
     CONFIG_FILE = "config/config.xml"
 
@@ -12,13 +14,13 @@ module SpanAdt
     private
 
     def load_xml
-      doc = Nokogiri::XML(open(CONFIG_FILE))
+      doc = Nokogiri::XML(open(CONFIG_FILE)).xpath('//config')
 
-      doc.search("config").each do |config|
-        @box_id = config.search("box_id").first.content.to_s
-        @server_ip = config.search("server_ip").first.content.to_s
-        @server_port = config.search("server_port").first.content.to_i
-      end
+      @box_id = doc.xpath('box_id').text
+      @server_ip = doc.xpath('server_ip').text
+      @server_port = doc.xpath('server_port').text.to_i
+      @scan_folder = doc.xpath('scan_folder').text
+      @test = doc.xpath('test').text
     end
   end
   
