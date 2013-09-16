@@ -42,18 +42,18 @@ module SpanAdt
         ftp.passive = true
         ftp.login(user, password)
         ftp.chdir remote_dir
-        Service.instance.send_event "ftp", "0x4100"
+        Service.instance.send_event "ftp", "4100"
       rescue Exception => e
-        Service.instance.send_event "ftp", "0x4101"
+        Service.instance.send_event "ftp", "4101"
         return
       end
 
       begin
-        Service.instance.send_event "ftp", "0x4105"
+        Service.instance.send_event "ftp", "4105"
         ftp.putbinaryfile @filename, @basename  
-        Service.instance.send_event "ftp", "0x4106"
+        Service.instance.send_event "ftp", "4106"
       rescue Exception => e
-        Service.instance.send_event "ftp", "0x4101"
+        Service.instance.send_event "ftp", "4101"
       end
       ftp.close
     end

@@ -4,8 +4,8 @@ module SpanAdt
   class HeartbeatProc
     def proc
       params = {}
-      params["Command"] = "Status"
-      params["Temp"] = 30
+      params["Command"]   = "Status"
+      params["Temp"]      = 30
       params["Powermode"] = "I"
       params["Spaceleft"] = "N"
       params["Filesleft"] = 0
