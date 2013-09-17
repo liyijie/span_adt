@@ -52,7 +52,7 @@ module SpanAdt
       params["Emodule"] = event_mod
       params["Sec"] = Time.now.to_i
       params["Usec"] = 0
-      msg = Service.create_request params
+      msg = Service.create_notype params
       send_msg msg
     end
 
@@ -64,7 +64,7 @@ module SpanAdt
     def process_msg msg
       begin
         callback = @callback_map.delete msg.sn
-        callback.on_msg msg if callback
+        callback.on_msg msg if callback && callback.respond_to?(:on_msg)
       rescue Exception => e
         puts "process msg error ..."
       end
