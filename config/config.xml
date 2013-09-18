@@ -6,5 +6,5 @@
   <scan_folder>log</scan_folder>
   
   <test></test>
-  <logout>3</logout>
+  <gitflow></gitflow>
 </config>
