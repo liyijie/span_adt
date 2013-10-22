@@ -51,9 +51,9 @@ module SpanAdt
       begin
         Service.instance.send_event "ftp", "4105"
         ftp.putbinaryfile @filename, @basename
-        Service.instance.send_event "ftp", "4106"
+        Service.instance.send_event "ftp", "4107"
       rescue Exception => e
-        Service.instance.send_event "ftp", "4101"
+        Service.instance.send_event "ftp", "4106"
       end
       ftp.close
     end
