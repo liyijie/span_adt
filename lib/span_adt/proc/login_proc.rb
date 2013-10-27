@@ -8,7 +8,7 @@ module SpanAdt
       login_params = {}
       login_params["Command"] = "Login"
       login_params["User"] = Loader.instance.box_id
-      login_params["Pass"] = get_password Loader.instance.box_id
+      login_params["Pass"] = @password || get_password(Loader.instance.box_id)
       login_params["Sver"] = "outum8.0"
       login_params["Cver"] = 1
 
@@ -19,11 +19,18 @@ module SpanAdt
     def on_msg msg
       Service.instance.session = msg.session
 
-      Thread.new do
-        loop do
-          HeartbeatProc.new.proc
-          sleep 60
+      result = msg.params["Result"]
+      if result == "AC"
+        Thread.new do
+          loop do
+            HeartbeatProc.new.proc
+            sleep 60
+          end
         end
+      else
+        @password = msg.params["NewPWD"]
+        sleep 10
+        self.proc
       end
     end
 
